@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.width = naturalWidth;
             canvas.height = naturalHeight;
 
+            // Canvasをクリア（透明にする）
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             // 2. 絵馬画像の描画
             ctx.drawImage(emaImageElement, 0, 0);
 
