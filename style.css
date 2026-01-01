@@ -37,12 +37,13 @@ body {
 
 .wish-input {
     position: absolute;
-    top: 55%;
-    /* 画像に合わせて微調整 */
+    top: 60%;
+    /* 画像に合わせて文字位置を下げる */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    height: 55%;
+    height: 50%;
+    /* 位置を下げた分、はみ出さないように高さを少し減らす */
 
     background: transparent;
     border: none;
