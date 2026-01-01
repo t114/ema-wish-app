@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>絵馬に願いを</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="ema-container" id="ema-area">
+            <img src="ema_hinagata.png" alt="絵馬" class="ema-image">
+            <textarea class="wish-input" placeholder="ここに願い事を書いてください" spellcheck="false"></textarea>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>文字の向き</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="direction" value="vertical-rl" checked> 縦書き</label>
+                    <label><input type="radio" name="direction" value="horizontal-tb"> 横書き</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>文字サイズ</label>
+                <input type="range" id="size-slider" min="16" max="64" value="24">
+            </div>
+
+            <div class="control-group">
+                <label>文字色</label>
+                <input type="color" id="color-picker" value="#333333">
+            </div>
+
+            <button id="download-btn">絵馬を保存する</button>
+        </div>
+    </div>
+    <script src="html2canvas.min.js"></script>
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
