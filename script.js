@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // ボックスの中心がtop:60%の位置にある
                 // テキストはボックスの上端から始まるので、ボックスの上端位置を計算
                 // 微調整: プレビューとの位置合わせのため少し下にオフセット
-                let currentY = targetY + (drawFontSize * 0.3);
+                let currentY = targetY + (drawFontSize * 0.6);
 
                 lines.forEach(line => {
                     let startX = targetX; // 左端
