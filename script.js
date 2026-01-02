@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isVertical) {
                 // --- 縦書き描画ロジック ---
                 const lines = text.split('\n');
-                const lineHeight = drawFontSize * 1.5; // CSSのline-heightに合わせるなら計算が必要だが一旦固定
+                const lineHeight = drawFontSize * 1.8; // CSSのline-height: 1.8に合わせる
 
                 // vertical-rl は右から左へ行が進む
                 // 開始X位置: ボックスの右端からスタート (パディング等は考慮していないのでギリギリになる)
@@ -153,18 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } else {
                 // --- 横書き描画ロジック ---
-                ctx.textBaseline = 'middle'; // Y方向の計算をしやすくするため
+                ctx.textBaseline = 'top';
                 const lines = text.split('\n');
-                const lineHeight = drawFontSize * 1.5;
+                const lineHeight = drawFontSize * 1.8; // CSSのline-height: 1.8に合わせる
 
                 // 横書きは上から下へ
-                let currentY = targetY + (lineHeight / 2); // 最初の行の中心Y座標 (上端)
-
-                // CSSでは vertical-align 的なプロパティがない限り上詰め
-                // もしボックス内で上下中央揃えしたいならCSSを確認する必要があるが、
-                // input/textareaは通常上詰め。
-
-                // ただしCSSで .wish-input は text-align: center なので水平方向は中央揃え
+                // CSSでは top:60%, transform:translate(-50%, -50%) なので、
+                // ボックスの中心がtop:60%の位置にある
+                // テキストはボックスの上端から始まるので、ボックスの上端位置を計算
+                let currentY = targetY;
 
                 lines.forEach(line => {
                     let startX = targetX; // 左端
