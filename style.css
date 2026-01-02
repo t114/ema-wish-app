@@ -118,6 +118,16 @@ input[type="color"] {
     padding: 2px;
 }
 
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Shippori Mincho", serif;
+    font-size: 0.9rem;
+}
+
 button#download-btn {
     background-color: #d94e4e;
     /* 絵馬の紐の色のような赤 */

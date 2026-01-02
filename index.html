@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&family=Noto+Serif+JP&family=Zen+Maru+Gothic&family=Yuji+Syuku&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -37,11 +39,30 @@
                 <input type="color" id="color-picker" value="#333333">
             </div>
 
+            <div class="control-group">
+                <label>配置</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="alignment" value="left"> 左寄せ</label>
+                    <label><input type="radio" name="alignment" value="center" checked> 中央</label>
+                    <label><input type="radio" name="alignment" value="right"> 右寄せ</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>フォント</label>
+                <select id="font-selector">
+                    <option value="Shippori Mincho">しっぽり明朝</option>
+                    <option value="Noto Serif JP">Noto Serif</option>
+                    <option value="Zen Maru Gothic">まるゴシック</option>
+                    <option value="Yuji Syuku">游書体</option>
+                </select>
+            </div>
+
             <button id="download-btn">絵馬を保存する</button>
         </div>
     </div>
     <script src="html2canvas.min.js"></script>
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
 </body>
 
 </html>

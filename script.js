@@ -23,6 +23,20 @@ document.addEventListener('DOMContentLoaded', () => {
         input.style.color = e.target.value;
     });
 
+    // 配置変更
+    const alignmentRadios = document.getElementsByName('alignment');
+    alignmentRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            input.style.textAlign = e.target.value;
+        });
+    });
+
+    // フォント変更
+    const fontSelector = document.getElementById('font-selector');
+    fontSelector.addEventListener('change', (e) => {
+        input.style.fontFamily = `"${e.target.value}", serif`;
+    });
+
     // ダウンロード機能（Canvas自前描画）
     downloadBtn.addEventListener('click', async () => {
         // スペースや改行を維持するために trim() はしない
@@ -64,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const computedStyle = window.getComputedStyle(input);
             const currentFontSize = parseFloat(computedStyle.fontSize);
             const drawFontSize = currentFontSize * scaleFactor;
+            const fontFamily = computedStyle.fontFamily;
 
-            ctx.font = `${drawFontSize}px "Shippori Mincho", serif`;
+            ctx.font = `${drawFontSize}px ${fontFamily}`;
             ctx.fillStyle = computedStyle.color || '#333333';
             ctx.textBaseline = 'top';
 
