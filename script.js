@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ダウンロード機能（Canvas自前描画）
     downloadBtn.addEventListener('click', async () => {
-        const text = input.value.trim();
-        if (!text) {
+        // スペースや改行を維持するために trim() はしない
+        const text = input.value;
+        // チェック用のみ trim する
+        if (!text.trim()) {
             if (!confirm('願い事が書かれていませんが、このまま保存しますか？')) {
                 return;
             }
