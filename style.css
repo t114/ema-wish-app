@@ -159,3 +159,110 @@ button#download-btn:hover {
         max-width: 400px;
     }
 }
+
+/* 画像透過チェッカー */
+.checker-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.checker-section h2 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.checker-description {
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.checker-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input-method {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-method label {
+    font-weight: bold;
+    color: #555;
+}
+
+#image-url-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: "Shippori Mincho", serif;
+}
+
+#check-url-btn {
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: "Shippori Mincho", serif;
+}
+
+#check-url-btn:hover {
+    background-color: #357abd;
+}
+
+#file-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checker-result {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid #4a90e2;
+}
+
+.checker-result h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+}
+
+#result-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.result-success {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.result-fail {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.result-preview {
+    margin-top: 15px;
+    max-width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}

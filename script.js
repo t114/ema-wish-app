@@ -217,4 +217,126 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadBtn.textContent = "絵馬を保存する";
         }
     });
+
+    // ========== 画像透過チェッカー ==========
+    const urlInput = document.getElementById('image-url-input');
+    const checkUrlBtn = document.getElementById('check-url-btn');
+    const fileInput = document.getElementById('file-input');
+    const checkerResult = document.getElementById('checker-result');
+    const resultContent = document.getElementById('result-content');
+    const checkerCanvas = document.getElementById('checker-canvas');
+
+    // URL入力からチェック
+    checkUrlBtn.addEventListener('click', () => {
+        const url = urlInput.value.trim();
+        if (!url) {
+            alert('画像URLを入力してください');
+            return;
+        }
+        checkImageTransparency(url, 'url');
+    });
+
+    // ファイルアップロードからチェック
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            checkImageTransparency(event.target.result, 'file');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // 透過判定メイン関数
+    function checkImageTransparency(src, sourceType) {
+        checkerResult.style.display = 'none';
+        resultContent.innerHTML = '<p>読み込み中...</p>';
+        checkerResult.style.display = 'block';
+
+        const img = new Image();
+
+        // CORS対応（URL入力の場合）
+        if (sourceType === 'url') {
+            img.crossOrigin = 'anonymous';
+        }
+
+        img.onload = () => {
+            try {
+                const canvas = checkerCanvas;
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                ctx.drawImage(img, 0, 0);
+
+                // ピクセルデータ取得
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const pixels = imageData.data;
+
+                // アルファチャンネルをスキャン
+                let hasTransparency = false;
+                let transparentPixels = 0;
+                const totalPixels = canvas.width * canvas.height;
+
+                for (let i = 3; i < pixels.length; i += 4) {
+                    if (pixels[i] < 255) {
+                        hasTransparency = true;
+                        transparentPixels++;
+                    }
+                }
+
+                const transparencyPercentage = ((transparentPixels / totalPixels) * 100).toFixed(2);
+
+                // 結果表示
+                let resultHTML = '';
+                if (hasTransparency) {
+                    resultHTML = `
+                        <p class="result-success">✓ この画像は透過PNG（アルファチャンネルあり）です</p>
+                        <p>透過ピクセル: ${transparentPixels.toLocaleString()} / ${totalPixels.toLocaleString()} (${transparencyPercentage}%)</p>
+                        <p>画像サイズ: ${img.width} × ${img.height}px</p>
+                    `;
+                } else {
+                    resultHTML = `
+                        <p class="result-fail">✗ この画像は透過なし（アルファチャンネルなし）です</p>
+                        <p>すべてのピクセルが不透明です</p>
+                        <p>画像サイズ: ${img.width} × ${img.height}px</p>
+                    `;
+                }
+
+                // プレビュー画像を追加
+                resultHTML += `<img src="${src}" class="result-preview" alt="プレビュー">`;
+
+                resultContent.innerHTML = resultHTML;
+
+            } catch (err) {
+                console.error('画像解析エラー:', err);
+                resultContent.innerHTML = `
+                    <p class="result-fail">エラー: 画像の解析に失敗しました</p>
+                    <p>${err.message}</p>
+                `;
+            }
+        };
+
+        img.onerror = () => {
+            let errorMsg = '';
+            if (sourceType === 'url') {
+                errorMsg = `
+                    <p class="result-fail">エラー: 画像の読み込みに失敗しました</p>
+                    <p>考えられる原因:</p>
+                    <ul>
+                        <li>URLが正しくない</li>
+                        <li>CORS制限により読み込めない（この場合は「方法2: ファイルをアップロード」をお試しください）</li>
+                        <li>画像が存在しない</li>
+                    </ul>
+                `;
+            } else {
+                errorMsg = '<p class="result-fail">エラー: ファイルの読み込みに失敗しました</p>';
+            }
+            resultContent.innerHTML = errorMsg;
+        };
+
+        img.src = src;
+    }
 });

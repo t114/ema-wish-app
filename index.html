@@ -61,8 +61,34 @@
             <button id="download-btn">絵馬を保存する</button>
         </div>
     </div>
+
+    <!-- 画像透過チェッカー -->
+    <div class="checker-section">
+        <h2>画像透過チェッカー</h2>
+        <p class="checker-description">画像URLまたはファイルをアップロードして、透過PNG（アルファチャンネル）かどうかを判定します。</p>
+
+        <div class="checker-controls">
+            <div class="input-method">
+                <label>方法1: 画像URLを入力</label>
+                <input type="text" id="image-url-input" placeholder="https://example.com/image.png">
+                <button id="check-url-btn">URLから判定</button>
+            </div>
+
+            <div class="input-method">
+                <label>方法2: ファイルをアップロード</label>
+                <input type="file" id="file-input" accept="image/*">
+            </div>
+        </div>
+
+        <div id="checker-result" class="checker-result" style="display: none;">
+            <h3>判定結果</h3>
+            <div id="result-content"></div>
+            <canvas id="checker-canvas" style="display: none;"></canvas>
+        </div>
+    </div>
+
     <script src="html2canvas.min.js"></script>
-    <script src="script.js?v=9"></script>
+    <script src="script.js?v=10"></script>
 </body>
 
 </html>
